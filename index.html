@@ -9,15 +9,25 @@
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-  <!-- Amy's cat picture, can be removed or moved around as needed. He's just sayin' Hi -->
-  <img src="./assets/images/monster.jpg" alt="Amy's Awesome Monster" id="monster-img">
+  
 
   <header>
-
+    <!-- Amy's cat picture, can be removed or moved around as needed. He's just sayin' Hi -->
+  <img src="./assets/images/monster.jpg" alt="Amy's Awesome Monster" id="monster-img">
+  <h1>Get Facts and Find Cats!</h1>
   </header>
 
   
   <main>
+
+    <div>
+      <form id="zip-code-form">
+        <label for="zip-code">Please enter your zip code:</label><br/>
+        <input type="text" id="zip-code" name="zip-code"><br/>
+        <input type="submit" id="submit-btn" value="Submit">
+      </form>
+    </div>
+
     <div id="cat-display"></div>
   </main>
   

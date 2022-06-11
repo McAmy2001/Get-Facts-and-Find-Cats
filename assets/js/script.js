@@ -1,5 +1,6 @@
 const catDisplayEl = document.getElementById("cat-display");
-
+const submitBtnEl = document.getElementById("submit-btn");
+const zipInputEl = document.getElementById("zip-code");
 
 // FUNCTION for displaying cat search results
 var displayCats = function(array) {
@@ -32,21 +33,18 @@ var displayCats = function(array) {
 
 
  // FUNCTION for searching for cats
-var searchForCats = function() {
+var searchForCats = function(zip) {
   // Required headers for RescueGroups API
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/vnd.api+json");
   myHeaders.append("Authorization", "XVgJPmtQ");
 
-  // Get zip code, needs to be changed to from input
-  var zipCode = prompt("What is your zip code?");
-
-  // Filters for searching by distance from zip coe
+  // Filters for searching by distance from zip code
   var raw = JSON.stringify({
     "data": {
       "filterRadius": {
-        "miles": 20,
-        "postalcode": zipCode
+        "miles": 30,
+        "postalcode": zip
       }
     }
   });
@@ -60,11 +58,11 @@ var searchForCats = function() {
   };
 
   // Initial fetch request by distance from zip code
-  fetch("https://api.rescuegroups.org/v5/public/animals/search/available/cats/haspic/?sort=random&limit=3", requestOptions)
+  fetch("https://api.rescuegroups.org/v5/public/animals/search/available/cats/haspic/?sort=random&limit=9", requestOptions)
     .then(function(response) {
       if (response.ok) {
         response.json().then(function(data) {
-          //console.log(data.data);
+          console.log(data.data);
 
           var initialArray = data.data;
           for (var i = 0; i < initialArray.length; i++) {
@@ -109,5 +107,11 @@ var searchForCats = function() {
     });
   };    
 
-  // Event listener on input form will call this function:
-searchForCats(); 
+var submitBtnHandler = function(event){
+  event.preventDefault();
+  var zipCode = zipInputEl.value.trim();
+  searchForCats(zipCode);
+}
+
+submitBtnEl.addEventListener("click", submitBtnHandler);
+//searchForCats(); 
