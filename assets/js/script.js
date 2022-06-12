@@ -3,6 +3,8 @@ const submitBtnEl = document.getElementById("submit-btn");
 const zipInputEl = document.getElementById("zip-code");
 const pastZipsEl = document.getElementById("pastZips");
 const clearPastZipsEl = document.getElementById("clear-saved-zips");
+const enterZipModal = document.getElementById("enter-zip");
+const errorModal = document.getElementById("api-error");
 
 // FUNCTION for displaying cat search results
 var displayCats = function(array) {
@@ -102,13 +104,29 @@ var searchForCats = function(zip) {
         }
       })
       } else {
-        alert("Please enter a zip code.")
+        //alert("Please enter a zip code.")
+        enterZipModal.classList.add("is-active");
       }
     })
     .catch(function(error) {
-      alert("Unable to connect to RescueGroups.")
+      //alert("Unable to connect to RescueGroups.")
+      errorModal.classList.add("is-active");
     });
   };    
+
+  function closeModal($el) {
+    $el.classList.remove('is-active');
+  }
+
+  // Add a click event on various child elements to close the parent modal
+  // Citation: This is taken from the example in the Bulma documentation for modals
+  (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+    const $target = $close.closest('.modal');
+
+    $close.addEventListener('click', () => {
+      closeModal($target);
+    });
+  });
 
   // FUNCTION for saving zip code searches to local storage
 var saveZip = function(zip) {

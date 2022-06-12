@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Get Facts and Find Cats</title>
   <link rel="icon" type="image/x-icon" href="./assets/images/cat-svgrepo-com.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
@@ -40,6 +41,28 @@
     <div id="cat-display"></div>
     
   </main>
+
+  <!-- Modal enter zip code alert -->
+  <div class="modal" id="enter-zip">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+        <p>Please enter a valid 5 digit zip code.</p>
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+
+  <!-- Modal error alert-->
+  <div class="modal" id="api-error">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+        <p>Unable to connect to RescueGroups.</p>
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
 
 
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
