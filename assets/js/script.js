@@ -2,6 +2,7 @@ const catDisplayEl = document.getElementById("cat-display");
 const submitBtnEl = document.getElementById("submit-btn");
 const zipInputEl = document.getElementById("zip-code");
 const pastZipsEl = document.getElementById("pastZips");
+const clearPastZipsEl = document.getElementById("clear-saved-zips");
 
 // FUNCTION for displaying cat search results
 var displayCats = function(array) {
@@ -138,7 +139,7 @@ var listZips = function() {
 listZips();
 
 var pastZipHandler = function(e) {
-  e.preventDefault();
+  //e.preventDefault();
   var zip = e.target.textContent;
   //var zipNum = parseInt(zip);
   console.log(zip);
@@ -154,5 +155,14 @@ var submitBtnHandler = function(event){
   zipInputEl.value = '';
 };
 
+// Clear past zip search history
+var clearHistory = function() {
+  localStorage.clear();
+  while (pastZipsEl.hasChildNodes()) {
+    pastZipsEl.removeChild(pastZipsEl.firstChild);
+  }
+};
+
 submitBtnEl.addEventListener("click", submitBtnHandler);
 pastZipsEl.addEventListener("click", pastZipHandler);
+clearPastZipsEl.addEventListener("click", clearHistory);
