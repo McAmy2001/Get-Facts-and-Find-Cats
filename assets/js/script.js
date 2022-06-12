@@ -1,6 +1,7 @@
 const catDisplayEl = document.getElementById("cat-display");
 const submitBtnEl = document.getElementById("submit-btn");
 const zipInputEl = document.getElementById("zip-code");
+const pastZipsEl = document.getElementById("pastZips");
 
 // FUNCTION for displaying cat search results
 var displayCats = function(array) {
@@ -34,6 +35,7 @@ var displayCats = function(array) {
 
  // FUNCTION for searching for cats
 var searchForCats = function(zip) {
+  console.log(zip);
   // Required headers for RescueGroups API
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/vnd.api+json");
@@ -107,11 +109,50 @@ var searchForCats = function(zip) {
     });
   };    
 
+var saveZip = function(zip) {
+    const storageZips = localStorage.getItem("savedZips");
+    const currentZip = {zip: zip};
+  
+    if (storageZips === null) {
+      localStorage.setItem("savedZips", JSON.stringify([currentZip]));
+    } else {
+      var zipsArray = JSON.parse(storageZips);
+      zipsArray.push(currentZip);
+      localStorage.setItem("savedZips", JSON.stringify(zipsArray));
+    }
+  };
+
+  // List past zip code searches on page initialization
+var listZips = function() {
+  const storageZips = localStorage.getItem("savedZips");const listedZips = JSON.parse(storageZips);
+
+  if (listedZips) {
+  for (var i = 0; i < listedZips.length; i++) {
+    var zipListEl = document.createElement("button");
+    zipListEl.className = "past-zip-btn";
+    zipListEl.textContent = listedZips[i].zip;
+    pastZipsEl.appendChild(zipListEl);
+  }
+}
+};
+listZips();
+
+var pastZipHandler = function(e) {
+  e.preventDefault();
+  var zip = e.target.textContent;
+  //var zipNum = parseInt(zip);
+  console.log(zip);
+  searchForCats(zip);
+};
+
+
 var submitBtnHandler = function(event){
   event.preventDefault();
   var zipCode = zipInputEl.value.trim();
   searchForCats(zipCode);
-}
+  saveZip(zipCode);
+  zipInputEl.value = '';
+};
 
 submitBtnEl.addEventListener("click", submitBtnHandler);
-//searchForCats(); 
+pastZipsEl.addEventListener("click", pastZipHandler);
