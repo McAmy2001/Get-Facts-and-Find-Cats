@@ -1,5 +1,10 @@
 const catDisplayEl = document.getElementById("cat-display");
-
+const submitBtnEl = document.getElementById("submit-btn");
+const zipInputEl = document.getElementById("zip-code");
+const pastZipsEl = document.getElementById("pastZips");
+const clearPastZipsEl = document.getElementById("clear-saved-zips");
+const enterZipModal = document.getElementById("enter-zip");
+const errorModal = document.getElementById("api-error");
 
 // FUNCTION for displaying cat search results
 var displayCats = function(array) {
@@ -32,21 +37,19 @@ var displayCats = function(array) {
 
 
  // FUNCTION for searching for cats
-var searchForCats = function() {
+var searchForCats = function(zip) {
+  console.log(zip);
   // Required headers for RescueGroups API
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/vnd.api+json");
   myHeaders.append("Authorization", "XVgJPmtQ");
 
-  // Get zip code, needs to be changed to from input
-  var zipCode = prompt("What is your zip code?");
-
-  // Filters for searching by distance from zip coe
+  // Filters for searching by distance from zip code
   var raw = JSON.stringify({
     "data": {
       "filterRadius": {
-        "miles": 20,
-        "postalcode": zipCode
+        "miles": 30,
+        "postalcode": zip
       }
     }
   });
@@ -60,11 +63,11 @@ var searchForCats = function() {
   };
 
   // Initial fetch request by distance from zip code
-  fetch("https://api.rescuegroups.org/v5/public/animals/search/available/cats/haspic/?sort=random&limit=3", requestOptions)
+  fetch("https://api.rescuegroups.org/v5/public/animals/search/available/cats/haspic/?sort=random&limit=9", requestOptions)
     .then(function(response) {
       if (response.ok) {
         response.json().then(function(data) {
-          //console.log(data.data);
+          console.log(data.data);
 
           var initialArray = data.data;
           for (var i = 0; i < initialArray.length; i++) {
@@ -101,13 +104,83 @@ var searchForCats = function() {
         }
       })
       } else {
-        alert("Please enter a zip code.")
+        //alert("Please enter a zip code.")
+        enterZipModal.classList.add("is-active");
       }
     })
     .catch(function(error) {
-      alert("Unable to connect to RescueGroups.")
+      //alert("Unable to connect to RescueGroups.")
+      errorModal.classList.add("is-active");
     });
   };    
 
-  // Event listener on input form will call this function:
-searchForCats(); 
+  function closeModal($el) {
+    $el.classList.remove('is-active');
+  }
+
+  // Add a click event on various child elements to close the parent modal
+  // Citation: This is taken from the example in the Bulma documentation for modals
+  (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+    const $target = $close.closest('.modal');
+
+    $close.addEventListener('click', () => {
+      closeModal($target);
+    });
+  });
+
+  // FUNCTION for saving zip code searches to local storage
+var saveZip = function(zip) {
+    const storageZips = localStorage.getItem("savedZips");
+    const currentZip = {zip: zip};
+  
+    if (storageZips === null) {
+      localStorage.setItem("savedZips", JSON.stringify([currentZip]));
+    } else {
+      var zipsArray = JSON.parse(storageZips);
+      zipsArray.push(currentZip);
+      localStorage.setItem("savedZips", JSON.stringify(zipsArray));
+    }
+  };
+
+  // FUNCTION for listing past zip code searches on page initialization
+var listZips = function() {
+  const storageZips = localStorage.getItem("savedZips");const listedZips = JSON.parse(storageZips);
+
+  if (listedZips) {
+  for (var i = 0; i < listedZips.length; i++) {
+    var zipListEl = document.createElement("button");
+    zipListEl.className = "past-zip-btn";
+    zipListEl.textContent = listedZips[i].zip;
+    pastZipsEl.appendChild(zipListEl);
+  }
+}
+};
+listZips();
+
+// FUNCTION to handle click of a past zip search
+var pastZipHandler = function(e) {
+  var zip = e.target.textContent;
+  searchForCats(zip);
+};
+
+// FUNCTION to handle click of submit button for zip code search
+var submitBtnHandler = function(event){
+  event.preventDefault();
+  var zipCode = zipInputEl.value.trim();
+  searchForCats(zipCode);
+  saveZip(zipCode);
+  zipInputEl.value = '';
+};
+
+// FUNCTION to clear past zip search history
+var clearHistory = function() {
+  localStorage.clear();
+  while (pastZipsEl.hasChildNodes()) {
+    pastZipsEl.removeChild(pastZipsEl.firstChild);
+  }
+};
+
+// Event Listeners
+submitBtnEl.addEventListener("click", submitBtnHandler);
+pastZipsEl.addEventListener("click", pastZipHandler);
+clearPastZipsEl.addEventListener("click", clearHistory);
