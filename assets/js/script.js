@@ -110,6 +110,7 @@ var searchForCats = function(zip) {
     });
   };    
 
+  // FUNCTION for saving zip code searches to local storage
 var saveZip = function(zip) {
     const storageZips = localStorage.getItem("savedZips");
     const currentZip = {zip: zip};
@@ -123,7 +124,7 @@ var saveZip = function(zip) {
     }
   };
 
-  // List past zip code searches on page initialization
+  // FUNCTION for listing past zip code searches on page initialization
 var listZips = function() {
   const storageZips = localStorage.getItem("savedZips");const listedZips = JSON.parse(storageZips);
 
@@ -138,15 +139,13 @@ var listZips = function() {
 };
 listZips();
 
+// FUNCTION to handle click of a past zip search
 var pastZipHandler = function(e) {
-  //e.preventDefault();
   var zip = e.target.textContent;
-  //var zipNum = parseInt(zip);
-  console.log(zip);
   searchForCats(zip);
 };
 
-
+// FUNCTION to handle click of submit button for zip code search
 var submitBtnHandler = function(event){
   event.preventDefault();
   var zipCode = zipInputEl.value.trim();
@@ -155,7 +154,7 @@ var submitBtnHandler = function(event){
   zipInputEl.value = '';
 };
 
-// Clear past zip search history
+// FUNCTION to clear past zip search history
 var clearHistory = function() {
   localStorage.clear();
   while (pastZipsEl.hasChildNodes()) {
@@ -163,6 +162,7 @@ var clearHistory = function() {
   }
 };
 
+// Event Listeners
 submitBtnEl.addEventListener("click", submitBtnHandler);
 pastZipsEl.addEventListener("click", pastZipHandler);
 clearPastZipsEl.addEventListener("click", clearHistory);
