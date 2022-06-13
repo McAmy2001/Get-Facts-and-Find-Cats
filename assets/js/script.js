@@ -5,26 +5,33 @@ const pastZipsEl = document.getElementById("pastZips");
 const clearPastZipsEl = document.getElementById("clear-saved-zips");
 const enterZipModal = document.getElementById("enter-zip");
 const errorModal = document.getElementById("api-error");
+const progressBarEl = document.getElementById("#progress-bar");
 
 // FUNCTION for displaying cat search results
 var displayCats = function(array) {
   console.log(array);
   var catInfoCard = document.createElement("div");
-  catInfoCard.className = "cat-info-card";
+  catInfoCard.className = "cat-info-card card m-1 p-3 equal-height column is-one-third has-text-centered has-background-info-dark";
 
+  var catPicDiv = document.createElement("div");
+  catPicDiv.className = "card-image has-text-centered";
+  var catPicFigure = document.createElement("figure");
+  catPicFigure.className = "image is-rounded is-inline-block";
   var catPic = document.createElement("img");
   catPic.src = array[1];
-  catPic.className = "cat-pic";
-  catInfoCard.appendChild(catPic);
+  catPic.className = "cat-pic media";
+  catPicFigure.appendChild(catPic);
+  catPicDiv.appendChild(catPicFigure);
+  catInfoCard.appendChild(catPicDiv);
 
   var catTitle = document.createElement("p");
   catTitle.textContent = array[0];
-  catTitle.className = "cat-name";
+  catTitle.className = "cat-name title has-text-black is-centered is-4";
   catInfoCard.appendChild(catTitle);
 
   var catWhere = document.createElement("p");
   catWhere.innerHTML = "Location:<br/>" + array[2] + "<br/>" + array[3] + "<br/>Phone:<br/>" + array[4];
-  catWhere.className = "cat-where";
+  catWhere.className = "cat-where has-text-black is-centered";
   catInfoCard.appendChild(catWhere);
 
   catDisplayEl.appendChild(catInfoCard);
@@ -149,7 +156,7 @@ var listZips = function() {
   if (listedZips) {
   for (var i = 0; i < listedZips.length; i++) {
     var zipListEl = document.createElement("button");
-    zipListEl.className = "past-zip-btn";
+    zipListEl.className = "past-zip-btn button is-small";
     zipListEl.textContent = listedZips[i].zip;
     pastZipsEl.appendChild(zipListEl);
   }

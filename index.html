@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="has-background-info-light">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,33 +12,48 @@
 <body>
   
 
-  <header>
+  <header class="hero is-medium has-text-centered has-background-info-dark">
     <!-- Amy's cat picture, can be removed or moved around as needed. He's just sayin' Hi -->
-  <img src="./assets/images/monster.jpg" alt="Amy's Awesome Monster" id="monster-img">
-  <h1>Get Facts and Find Cats!</h1>
+    <h1 class="title is-size-1 has-text-info-light">
+      Get Facts and Find Cats!
+    </h1>
+    <!-- <figure class="has-text-centered"><img src="./assets/images/monster.jpg" alt="Amy's Awesome Monster" id="monster-img"></figure> -->
   </header>
 
   
-  <main>
+  <main class="is-family-secondary">
     <!-- Div for search form and past search list -->
-    <div>
+    <div id="search" class="container columns is-centered">
       <!-- Form for zip code search -->
-      <form id="zip-code-form">
+      <form id="zip-code-form" class="column is-half">
         <label for="zip-code">Please enter your zip code:</label><br/>
-        <input type="text" id="zip-code" name="zip-code"><br/>
-        <input type="submit" id="submit-btn" value="Submit">
+        <input type="text" id="zip-code" name="zip-code" class="input is-link column is-one-third mt-3" placeholder="Ex: 90210"><br/>
+        <input type="submit" id="submit-btn" class="button is-link" value="Submit">
       </form>
       <!-- Div for holding past zip code searches -->
-      <div>
-        <div id="pastZips"></div>
+      <div class="level-right">
+        <div id="pastZips" class="column is-half"></div>
         <div>
-          <button id="clear-saved-zips">Clear history</button>
+          <button id="clear-saved-zips" class="button">Clear History</button>
         </div>
       </div>
       
     </div>
-  <!-- Div to hold dynamically created car search results -->
-    <div id="cat-display"></div>
+
+    <!-- Div to populate cat fact -->
+    <article id="cat-fact" class="message is-danger is-centered is-hidden">
+      <div class="message-header">
+        <!-- Cat Fact! -->
+      </div>
+      <div class="message-body">
+        <!--Here is a cat fact! Everyone loves facts about cats! -->
+      </div>
+    </article>
+
+  <!-- Div to hold dynamically created cat search results -->
+    <div id="cat-display" class="m-3 columns is-multiline is-centered">
+      <progress id="progress-bar" class="progress is-large is-info is-invisible" max="100"></progress>
+    </div>
     
   </main>
 
