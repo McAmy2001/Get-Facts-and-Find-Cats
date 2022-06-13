@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Facts and Find Cats</title>
+  <link rel="icon" type="image/x-icon" href="./assets/images/cat-svgrepo-com.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+  
+
+  <header>
+    <!-- Amy's cat picture, can be removed or moved around as needed. He's just sayin' Hi -->
+  <img src="./assets/images/monster.jpg" alt="Amy's Awesome Monster" id="monster-img">
+  <h1>Get Facts and Find Cats!</h1>
+  </header>
+
+  
+  <main>
+    <!-- Div for search form and past search list -->
+    <div>
+      <!-- Form for zip code search -->
+      <form id="zip-code-form">
+        <label for="zip-code">Please enter your zip code:</label><br/>
+        <input type="text" id="zip-code" name="zip-code"><br/>
+        <input type="submit" id="submit-btn" value="Submit">
+      </form>
+      <!-- Div for holding past zip code searches -->
+      <div>
+        <div id="pastZips"></div>
+        <div>
+          <button id="clear-saved-zips">Clear history</button>
+        </div>
+      </div>
+      
+    </div>
+  <!-- Div to hold dynamically created car search results -->
+    <div id="cat-display"></div>
+    
+  </main>
+
+  <!-- Modal enter zip code alert -->
+  <div class="modal" id="enter-zip">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+        <p>Please enter a valid 5 digit zip code.</p>
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+
+  <!-- Modal error alert-->
+  <div class="modal" id="api-error">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+        <p>Unable to connect to RescueGroups.</p>
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script src="./assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+body {
+  background-color: beige;
+}
+#monster-img {
+  width: 20%;
+  height: auto;
+}
+#cat-display {
+  display: flex;
+}
+.cat-info-card {
+  border: 2px solid black;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+form {
+  border: solid 3px black;
+  padding: 30px;
+  margin: 30px;
+}
