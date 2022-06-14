@@ -11,12 +11,12 @@ const progressBarEl = document.getElementById("#progress-bar");
 var displayCats = function(array) {
   console.log(array);
   var catInfoCard = document.createElement("div");
-  catInfoCard.className = "cat-info-card card m-1 p-3 equal-height column is-one-third has-text-centered has-background-info-dark";
+  catInfoCard.className = "cat-info-card card m-1 p-3 equal-height column is-one-third has-text-centered has-background-info-dark is-shadow";
 
   var catPicDiv = document.createElement("div");
   catPicDiv.className = "card-image has-text-centered";
   var catPicFigure = document.createElement("figure");
-  catPicFigure.className = "image is-rounded is-inline-block";
+  catPicFigure.className = "image is-rounded is-inline-block is-shadow";
   var catPic = document.createElement("img");
   catPic.src = array[1];
   catPic.className = "cat-pic media";
@@ -26,12 +26,12 @@ var displayCats = function(array) {
 
   var catTitle = document.createElement("p");
   catTitle.textContent = array[0];
-  catTitle.className = "cat-name title has-text-black is-centered is-4";
+  catTitle.className = "cat-name title has-text-black is-centered is-3";
   catInfoCard.appendChild(catTitle);
 
   var catWhere = document.createElement("p");
   catWhere.innerHTML = "Location:<br/><b>" + array[2] + "<br/>" + array[3] + "</b><br/><br/>Phone:<br/><b>" + array[4] + "</b>";
-  catWhere.className = "cat-where column is-half is-offset-one-quarter has-background-link-dark has-text-black is-centered";
+  catWhere.className = "cat-where column is-half is-offset-one-quarter has-background-link-dark has-text-black is-centered is-shadow";
   catInfoCard.appendChild(catWhere);
 
   catDisplayEl.appendChild(catInfoCard);
