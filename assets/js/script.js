@@ -31,7 +31,7 @@ var displayCats = function(array) {
 
   var catWhere = document.createElement("p");
   catWhere.innerHTML = "Location:<br/><b>" + array[2] + "<br/>" + array[3] + "</b><br/><br/>Phone:<br/><b>" + array[4] + "</b>";
-  catWhere.className = "cat-where column has-background-link-dark has-text-black is-centered";
+  catWhere.className = "cat-where column is-half is-offset-one-quarter has-background-link-dark has-text-black is-centered";
   catInfoCard.appendChild(catWhere);
 
   catDisplayEl.appendChild(catInfoCard);

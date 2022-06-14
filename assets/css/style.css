@@ -2,3 +2,7 @@
   width: 20%;
   height: auto;
 }
+
+.is-family-lato {
+  font-family: 'Lato', sans-serif;
+}
