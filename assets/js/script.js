@@ -8,6 +8,7 @@ const errorModal = document.getElementById("api-error");
 
 // FUNCTION for displaying cat search results
 var displayCats = function(array) {
+
   console.log(array);
   var catInfoCard = document.createElement("div");
   catInfoCard.className = "cat-info-card";
@@ -128,22 +129,54 @@ var searchForCats = function(zip) {
     });
   });
 
+
+
+  //var displayCatFacts = function(array) {
+  //  console.log(array);
+  //}
+
+  //var catFacts = function() {
+  //  fetch("https://cat-fact.herokuapp.com/facts")
+  //  .then(function(response) {
+  //    if (response.ok) {
+  //      response.json().then(function(data) {
+  //        //console.log(data);
+  //        var catFactsArray = [];
+  //        for (var i = 0; i < data.length; i++) {
+  //          //console.log(data[i].text);
+  //          catFactsArray.push(data[i].text);
+  //          //console.log(catFactsArray); 
+  //        }
+  //        displayCatFacts(catFactsArray);
+  //      })
+  //    }
+  //  })
+  //};
+  //catFacts();
+  
+
   // FUNCTION for saving zip code searches to local storage
-var saveZip = function(zip) {
+var saveZip = function(zipCode) {
     const storageZips = localStorage.getItem("savedZips");
-    const currentZip = {zip: zip};
+    const currentZip = {zip: zipCode};
+    var zipsArray = JSON.parse(storageZips);
   
     if (storageZips === null) {
       localStorage.setItem("savedZips", JSON.stringify([currentZip]));
+    } else if (zipsArray.find(e => e.zip === zipCode)) {
+      localStorage.setItem("savedZips", JSON.stringify(zipsArray));
     } else {
-      var zipsArray = JSON.parse(storageZips);
       zipsArray.push(currentZip);
       localStorage.setItem("savedZips", JSON.stringify(zipsArray));
     }
+    listZips();
   };
 
-  // FUNCTION for listing past zip code searches on page initialization
+  // FUNCTION for listing past zip code searches on page initialization and after search
 var listZips = function() {
+  while (pastZipsEl.firstChild) {
+    pastZipsEl.removeChild(pastZipsEl.firstChild);
+  }
   const storageZips = localStorage.getItem("savedZips");const listedZips = JSON.parse(storageZips);
 
   if (listedZips) {
@@ -160,6 +193,11 @@ listZips();
 // FUNCTION to handle click of a past zip search
 var pastZipHandler = function(e) {
   var zip = e.target.textContent;
+
+  while (catDisplayEl.firstChild) {
+    catDisplayEl.removeChild(catDisplayEl.firstChild);
+  }
+
   searchForCats(zip);
 };
 
@@ -167,6 +205,10 @@ var pastZipHandler = function(e) {
 var submitBtnHandler = function(event){
   event.preventDefault();
   var zipCode = zipInputEl.value.trim();
+
+  while (catDisplayEl.firstChild) {
+    catDisplayEl.removeChild(catDisplayEl.firstChild);
+  }
   searchForCats(zipCode);
   saveZip(zipCode);
   zipInputEl.value = '';
