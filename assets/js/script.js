@@ -30,8 +30,8 @@ var displayCats = function(array) {
   catInfoCard.appendChild(catTitle);
 
   var catWhere = document.createElement("p");
-  catWhere.innerHTML = "Location:<br/>" + array[2] + "<br/>" + array[3] + "<br/>Phone:<br/>" + array[4];
-  catWhere.className = "cat-where has-text-black is-centered";
+  catWhere.innerHTML = "Location:<br/><b>" + array[2] + "<br/>" + array[3] + "</b><br/><br/>Phone:<br/><b>" + array[4] + "</b>";
+  catWhere.className = "cat-where column has-background-link-dark has-text-black is-centered";
   catInfoCard.appendChild(catWhere);
 
   catDisplayEl.appendChild(catInfoCard);
@@ -154,6 +154,7 @@ var listZips = function() {
   const storageZips = localStorage.getItem("savedZips");const listedZips = JSON.parse(storageZips);
 
   if (listedZips) {
+    clearPastZipsEl.classList.remove("is-hidden");
   for (var i = 0; i < listedZips.length; i++) {
     var zipListEl = document.createElement("button");
     zipListEl.className = "past-zip-btn button is-small";

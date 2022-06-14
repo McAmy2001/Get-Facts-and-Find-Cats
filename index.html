@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="has-background-info-light">
+<html lang="en" class="has-background-grey-light">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +13,6 @@
   
 
   <header class="hero is-medium has-text-centered has-background-info-dark">
-    <!-- Amy's cat picture, can be removed or moved around as needed. He's just sayin' Hi -->
     <h1 class="title is-size-1 has-text-info-light">
       Get Facts and Find Cats!
     </h1>
@@ -23,7 +22,7 @@
   
   <main class="is-family-secondary">
     <!-- Div for search form and past search list -->
-    <div id="search" class="container columns is-centered">
+    <div id="search" class="container columns is-centered is-fluid p-3">
       <!-- Form for zip code search -->
       <form id="zip-code-form" class="column is-half">
         <label for="zip-code">Please enter your zip code:</label><br/>
@@ -34,14 +33,14 @@
       <div class="level-right">
         <div id="pastZips" class="column is-half"></div>
         <div>
-          <button id="clear-saved-zips" class="button">Clear History</button>
+          <button id="clear-saved-zips" class="button is-dark is-hidden">Clear History</button>
         </div>
       </div>
       
     </div>
 
     <!-- Div to populate cat fact -->
-    <article id="cat-fact" class="message is-danger is-centered is-hidden">
+    <article id="cat-fact" class="message is-primary is-centered is-hidden">
       <div class="message-header">
         <!-- Cat Fact! -->
       </div>
