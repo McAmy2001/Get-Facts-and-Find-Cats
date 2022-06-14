@@ -128,6 +128,30 @@ var searchForCats = function(zip) {
     });
   });
 
+  var displayCatFacts = function(array) {
+    console.log(array);
+  }
+
+  //var catFacts = function() {
+  //  fetch("https://cat-fact.herokuapp.com/facts")
+  //  .then(function(response) {
+  //    if (response.ok) {
+  //      response.json().then(function(data) {
+  //        //console.log(data);
+  //        var catFactsArray = [];
+  //        for (var i = 0; i < data.length; i++) {
+  //          //console.log(data[i].text);
+  //          catFactsArray.push(data[i].text);
+  //          //console.log(catFactsArray); 
+  //        }
+  //        displayCatFacts(catFactsArray);
+  //      })
+  //    }
+  //  })
+  //};
+  //catFacts();
+  
+
   // FUNCTION for saving zip code searches to local storage
 var saveZip = function(zip) {
     const storageZips = localStorage.getItem("savedZips");
