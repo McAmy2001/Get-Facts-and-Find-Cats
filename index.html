@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="has-background-grey-light">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,39 +8,60 @@
   <title>Get Facts and Find Cats</title>
   <link rel="icon" type="image/x-icon" href="./assets/images/cat-svgrepo-com.svg">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body>
-  
 
-  <header>
-    <!-- Amy's cat picture, can be removed or moved around as needed. He's just sayin' Hi -->
-  <img src="./assets/images/monster.jpg" alt="Amy's Awesome Monster" id="monster-img">
-  <h1>Get Facts and Find Cats!</h1>
+<body class="is-family-lato">
+
+
+  <header class="hero is-medium has-text-centered has-background-info-dark">
+    <h1 class="title is-size-1 has-text-info-light">
+      Get Facts and Find Cats!
+    </h1>
+    <!-- <figure class="has-text-centered"><img src="./assets/images/monster.jpg" alt="Amy's Awesome Monster" id="monster-img"></figure> -->
   </header>
 
-  
+
   <main>
     <!-- Div for search form and past search list -->
-    <div>
+    <div id="search" class="container columns is-centered is-fluid p-3">
       <!-- Form for zip code search -->
-      <form id="zip-code-form">
-        <label for="zip-code">Please enter your zip code:</label><br/>
-        <input type="text" id="zip-code" name="zip-code"><br/>
-        <input type="submit" id="submit-btn" value="Submit">
+      <form id="zip-code-form" class="column is-half">
+        <label for="zip-code">Please enter your zip code:</label><br />
+        <input type="text" id="zip-code" name="zip-code" class="input is-link column is-one-third mt-3"
+          placeholder="Ex: 90210"><br />
+        <input type="submit" id="submit-btn" class="button is-link" value="Submit">
       </form>
       <!-- Div for holding past zip code searches -->
-      <div>
-        <div id="pastZips"></div>
+      <div class="level-right">
+        <div id="pastZips" class="column is-half"></div>
         <div>
-          <button id="clear-saved-zips">Clear history</button>
+          <button id="clear-saved-zips" class="button is-dark is-hidden">Clear History</button>
         </div>
       </div>
-      
+
     </div>
-  <!-- Div to hold dynamically created cat search results -->
-    <div id="cat-display"></div>
-    
+
+    <!-- Div to populate cat fact -->
+    <article id="cat-fact" class="message is-primary is-centered is-hidden">
+      <div class="message-header">
+        <!-- Cat Fact! -->
+      </div>
+      <div class="message-body">
+        <!--Here is a cat fact! Everyone loves facts about cats! -->
+      </div>
+    </article>
+
+    <!-- Div to hold dynamically created cat search results -->
+    <div id="cat-display" class="m-3 columns is-multiline is-centered">
+      <progress id="progress-bar" class="progress is-large is-info is-invisible" max="100"></progress>
+    </div>
+
   </main>
 
   <!-- Modal enter zip code alert -->
@@ -69,4 +91,5 @@
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
   <script src="./assets/js/script.js"></script>
 </body>
+
 </html>

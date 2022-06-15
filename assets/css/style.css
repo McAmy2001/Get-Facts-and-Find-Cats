@@ -1,23 +1,12 @@
-body {
-  background-color: beige;
-}
 #monster-img {
   width: 20%;
   height: auto;
 }
-#cat-display {
-  display: flex;
+
+.is-family-lato {
+  font-family: 'Lato', sans-serif;
 }
-.cat-info-card {
-  border: 2px solid black;
-}
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-form {
-  border: solid 3px black;
-  padding: 30px;
-  margin: 30px;
+
+.is-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
