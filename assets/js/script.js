@@ -179,14 +179,16 @@ var saveZip = function(zipCode) {
     const currentZip = {zip: zipCode};
     var zipsArray = JSON.parse(storageZips);
   
-    if (storageZips === null) {
-      localStorage.setItem("savedZips", JSON.stringify([currentZip]));
-    } else if (zipsArray.find(e => e.zip === zipCode)) {
-      localStorage.setItem("savedZips", JSON.stringify(zipsArray));
-    } else {
-      zipsArray.push(currentZip);
-      localStorage.setItem("savedZips", JSON.stringify(zipsArray));
-    }
+    if (zipCode.length === 5) {
+      if (storageZips === null) {
+        localStorage.setItem("savedZips", JSON.stringify([currentZip]));
+      } else if (zipsArray.find(e => e.zip === zipCode)) {
+        localStorage.setItem("savedZips", JSON.stringify(zipsArray));
+      } else {
+        zipsArray.push(currentZip);
+        localStorage.setItem("savedZips", JSON.stringify(zipsArray));
+      }
+    } 
     listZips();
   };
 
