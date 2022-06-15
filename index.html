@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-<body class="is-family-lato">ƒ
+<body class="is-family-lato">
 
 
   <header class="hero is-medium has-text-centered has-background-info-dark">
@@ -38,8 +38,8 @@
         <input type="submit" id="submit-btn" class="button is-link" value="Submit">
       </form>
 
-       <!-- map-->
-<div id="googleMap" style="width:100%;height:400px;"></div>
+      <!-- map-->
+      <!-- <div id="googleMap" style="width:100%;height:400px;"></div>
 
 <script>
 function myMap() {
@@ -49,11 +49,8 @@ var mapProp= {
 };
 var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
 }
-</script>
+</script> -->
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv0Em_noKR59sVQ1Dr3Uz2HY02Q1C6Rcc&callback=myMap">
-  
-</script>
       <!-- Div for holding past zip code searches -->
       <div class="level-right">
         <div id="pastZips" class="column is-half"></div>
@@ -65,18 +62,18 @@ var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
     </div>
 
     <!-- Div to populate cat fact -->
-    <div id="cat-fact" class="mb-6 is-centered is-hidden">
-      <div class="columns">
-        <article class="message is-success column is-three-fifths is-offset-one-fifth">
-          <div class="message-header">
-            Cat Fact!
-          </div>
-          <div class="message-body">
-            <!-- Here is a cat fact! Everyone loves facts about cats! -->
-          </div>
-        </article>
-      </div>
+
+    <div id="cat-fact-card" class="columns mb-6 is-hidden">
+      <article class="message is-success column is-three-fifths is-offset-one-fifth">
+        <div class="message-header">
+          Cat Fact!
+        </div>
+        <div id="cat-fact" class="message-body">
+          <!-- Here is a cat fact! Everyone loves facts about cats! -->
+        </div>
+      </article>
     </div>
+
 
     <!-- Div to hold dynamically created cat search results -->
     <div id="cat-display" class="m-3 columns is-multiline is-centered">
@@ -113,6 +110,8 @@ var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv0Em_noKR59sVQ1Dr3Uz2HY02Q1C6Rcc&callback=myMap"></script>
   <script src="./assets/js/script.js"></script>
 </body>
 

@@ -8,7 +8,7 @@ const errorModal = document.getElementById("api-error");
 const progressBarEl = document.getElementById("#progress-bar");
 
 // FUNCTION for displaying cat search results
-var displayCats = function(array) {
+var displayCats = function (array) {
 
   console.log(array);
   var catInfoCard = document.createElement("div");
@@ -39,13 +39,13 @@ var displayCats = function(array) {
 }
 
 // FUNCTION for mapping locations from search results
- var mapCats = function(loc) {
-   console.log(loc);
- }
+var mapCats = function (loc) {
+  console.log(loc);
+}
 
 
- // FUNCTION for searching for cats
-var searchForCats = function(zip) {
+// FUNCTION for searching for cats
+var searchForCats = function (zip) {
   console.log(zip);
   // Required headers for RescueGroups API
   var myHeaders = new Headers();
@@ -72,92 +72,92 @@ var searchForCats = function(zip) {
 
   // Initial fetch request by distance from zip code
   fetch("https://api.rescuegroups.org/v5/public/animals/search/available/cats/haspic/?sort=random&limit=9", requestOptions)
-    .then(function(response) {
+    .then(function (response) {
       if (response.ok) {
-        response.json().then(function(data) {
+        response.json().then(function (data) {
           console.log(data.data);
 
           var initialArray = data.data;
           for (var i = 0; i < initialArray.length; i++) {
-          // Get ID number for follow up fetch
-          catIDNum = (data.data[i].id);
-          // Second fetch by ID, required for location data
-          fetch("https://api.rescuegroups.org/v5/public/animals/" + catIDNum + "/?include=locations", {
-            method: 'GET',
-            headers: myHeaders
-          })
-          .then(function(response) {
-            if (response.ok) {
-              response.json().then(function(data) {
-                console.log(data);
+            // Get ID number for follow up fetch
+            catIDNum = (data.data[i].id);
+            // Second fetch by ID, required for location data
+            fetch("https://api.rescuegroups.org/v5/public/animals/" + catIDNum + "/?include=locations", {
+              method: 'GET',
+              headers: myHeaders
+            })
+              .then(function (response) {
+                if (response.ok) {
+                  response.json().then(function (data) {
+                    console.log(data);
 
-                // Declare variables from data for catArray
-                var catName = (data.data[0].attributes.name);
-                var catImgUrl = (data.data[0].attributes.pictureThumbnailUrl);
-                var catStreet = data.included[0].attributes.street
-                var catCity = data.included[0].attributes.citystate;
-                var catLocation = catStreet + ", " + catCity;
-                // If location data is present send to mapCats function
-                if (data.included[0].attributes.street !== undefined && data.included[0].attributes.citystate !== undefined) {
-                  mapCats(catLocation);
-                };
-                catPhone = data.included[0].attributes.phone;
+                    // Declare variables from data for catArray
+                    var catName = (data.data[0].attributes.name);
+                    var catImgUrl = (data.data[0].attributes.pictureThumbnailUrl);
+                    var catStreet = data.included[0].attributes.street
+                    var catCity = data.included[0].attributes.citystate;
+                    var catLocation = catStreet + ", " + catCity;
+                    // If location data is present send to mapCats function
+                    if (data.included[0].attributes.street !== undefined && data.included[0].attributes.citystate !== undefined) {
+                      mapCats(catLocation);
+                    };
+                    catPhone = data.included[0].attributes.phone;
 
-                // Declare carArray to send to displayCats function
-                catArray = [catName, catImgUrl, catStreet, catCity, catPhone];
-                displayCats(catArray);
+                    // Declare carArray to send to displayCats function
+                    catArray = [catName, catImgUrl, catStreet, catCity, catPhone];
+                    displayCats(catArray);
+                  })
+                }
               })
-            }
-          })
-        }
-      })
+          }
+        })
       } else {
         //alert("Please enter a zip code.")
         enterZipModal.classList.add("is-active");
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       //alert("Unable to connect to RescueGroups.")
       errorModal.classList.add("is-active");
     });
-  };    
+};
 
-  function closeModal($el) {
-    $el.classList.remove('is-active');
-  }
+function closeModal($el) {
+  $el.classList.remove('is-active');
+}
 
-  // Add a click event on various child elements to close the parent modal
-  // Citation: This is taken from the example in the Bulma documentation for modals
-  (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
-    const $target = $close.closest('.modal');
+// Add a click event on various child elements to close the parent modal
+// Citation: This is taken from the example in the Bulma documentation for modals
+(document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+  const $target = $close.closest('.modal');
 
-    $close.addEventListener('click', () => {
-      closeModal($target);
-    });
+  $close.addEventListener('click', () => {
+    closeModal($target);
   });
+});
 
 //----------------------------- Cat Fact Section ---------------------------------//
-const catFactsEl = document.createElement('cat-facts');
-var catTimer = 0;
+var catFactCounter = 0;
 const apiUrl = "https://cat-fact.herokuapp.com/facts";
-  var displayCatFacts = function(array) {
-    console.log(array);
-    //console.log(array[0])
-      console.log(array[catTimer]);
-        var catFactCard = document.getElementById("cat-fact");
-        catFactCard.textContent = array[catTimer];
-        catFactCard.classList.remove("is-hidden");
-        catTimer = catTimer + 1;
-        if (catTimer > 4) {
-          catTimer = 0;
-        }
+var displayCatFacts = function (array) {
+  console.log(array);
+  //console.log(array[0])
+  console.log(array[catFactCounter]);
+  var catFactCard = document.getElementById("cat-fact-card");
+  var catFactMsg = document.getElementById("cat-fact");
+  catFactMsg.textContent = array[catFactCounter];
+  catFactCard.classList.remove("is-hidden");
+  catFactCounter = catFactCounter + 1;
+  if (catFactCounter > 4) {
+    catFactCounter = 0;
   }
+}
 
-  var catFacts = function() {
-    fetch(apiUrl)
-    .then(function(response) {
+var catFacts = function () {
+  fetch(apiUrl)
+    .then(function (response) {
       if (response.ok) {
-        response.json().then(function(data) {
+        response.json().then(function (data) {
           //console.log(data);
           var catFactsArray = [];
           for (var i = 0; i < data.length; i++) {
@@ -169,61 +169,63 @@ const apiUrl = "https://cat-fact.herokuapp.com/facts";
         })
       }
     })
-  };
- 
-  
+};
 
-  // FUNCTION for saving zip code searches to local storage
-var saveZip = function(zipCode) {
-    const storageZips = localStorage.getItem("savedZips");
-    const currentZip = {zip: zipCode};
-    var zipsArray = JSON.parse(storageZips);
-  
-    if (zipCode.length === 5) {
-      if (storageZips === null) {
-        localStorage.setItem("savedZips", JSON.stringify([currentZip]));
-      } else if (zipsArray.find(e => e.zip === zipCode)) {
-        localStorage.setItem("savedZips", JSON.stringify(zipsArray));
-      } else {
-        zipsArray.push(currentZip);
-        localStorage.setItem("savedZips", JSON.stringify(zipsArray));
-      }
-    } 
-    listZips();
-  };
 
-  // FUNCTION for listing past zip code searches on page initialization and after search
-var listZips = function() {
+
+// FUNCTION for saving zip code searches to local storage
+var saveZip = function (zipCode) {
+  const storageZips = localStorage.getItem("savedZips");
+  const currentZip = { zip: zipCode };
+  var zipsArray = JSON.parse(storageZips);
+
+  if (zipCode.length === 5) {
+    if (storageZips === null) {
+      localStorage.setItem("savedZips", JSON.stringify([currentZip]));
+    } else if (zipsArray.find(e => e.zip === zipCode)) {
+      localStorage.setItem("savedZips", JSON.stringify(zipsArray));
+    } else {
+      zipsArray.push(currentZip);
+      localStorage.setItem("savedZips", JSON.stringify(zipsArray));
+    }
+  }
+  listZips();
+};
+
+// FUNCTION for listing past zip code searches on page initialization and after search
+var listZips = function () {
   while (pastZipsEl.firstChild) {
     pastZipsEl.removeChild(pastZipsEl.firstChild);
   }
-  const storageZips = localStorage.getItem("savedZips");const listedZips = JSON.parse(storageZips);
+  const storageZips = localStorage.getItem("savedZips"); const listedZips = JSON.parse(storageZips);
 
   if (listedZips) {
     clearPastZipsEl.classList.remove("is-hidden");
-  for (var i = 0; i < listedZips.length; i++) {
-    var zipListEl = document.createElement("button");
-    zipListEl.className = "past-zip-btn button is-small";
-    zipListEl.textContent = listedZips[i].zip;
-    pastZipsEl.appendChild(zipListEl);
+    for (var i = 0; i < listedZips.length; i++) {
+      var zipListEl = document.createElement("button");
+      zipListEl.className = "past-zip-btn button is-small";
+      zipListEl.textContent = listedZips[i].zip;
+      pastZipsEl.appendChild(zipListEl);
+    }
   }
-}
 };
 listZips();
 
 // FUNCTION to handle click of a past zip search
-var pastZipHandler = function(e) {
+var pastZipHandler = function (e) {
   var zip = e.target.textContent;
+  zipInputEl.textContent = zip;
 
   while (catDisplayEl.firstChild) {
     catDisplayEl.removeChild(catDisplayEl.firstChild);
   }
 
   searchForCats(zip);
+  catFacts();
 };
 
 // FUNCTION to handle click of submit button for zip code search
-var submitBtnHandler = function(event){
+var submitBtnHandler = function (event) {
   event.preventDefault();
   var zipCode = zipInputEl.value.trim();
 
@@ -237,7 +239,7 @@ var submitBtnHandler = function(event){
 };
 
 // FUNCTION to clear past zip search history
-var clearHistory = function() {
+var clearHistory = function () {
   localStorage.clear();
   while (pastZipsEl.hasChildNodes()) {
     pastZipsEl.removeChild(pastZipsEl.firstChild);
