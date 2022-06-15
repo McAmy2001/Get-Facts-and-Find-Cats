@@ -89,7 +89,10 @@ var searchForCats = function(zip) {
                 var catImgUrl = (data.data[0].attributes.pictureThumbnailUrl);
                 var catStreet = data.included[0].attributes.street
                 var catCity = data.included[0].attributes.citystate;
-                var catLocation = catStreet + ", " + catCity;
+                var catLat = data.included[0].attributes.lat;
+                var catLon = data.included[0].attributes.lon;
+                var catLocation = [catStreet, catCity, catLat, catLon];
+                console.log(catLocation);
                 // If location data is present send to mapCats function
                 if (data.included[0].attributes.street !== undefined && data.included[0].attributes.citystate !== undefined) {
                   mapCats(catLocation);
