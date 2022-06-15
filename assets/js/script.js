@@ -141,7 +141,7 @@ const catFactsEl = document.createElement('cat-facts');
 var catTimer = 0;
 const apiUrl = "https://cat-fact.herokuapp.com/facts";
   var displayCatFacts = function(array) {
-    //console.log(array);
+    console.log(array);
     //console.log(array[0])
       console.log(array[catTimer]);
         var catFactCard = document.getElementById("cat-fact");
