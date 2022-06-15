@@ -239,8 +239,8 @@ let map;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 46.7296, lng: 94.6859 },
-    zoom: 10,
+    center: { lat: 40.7296, lng: -79.6859 },
+    zoom: 9,
   });
 }
 
@@ -253,7 +253,25 @@ function initGoogle () {
     center: location,
     zoom: 9
   }
-  map = new google.maps.Map(document.getElementById("map"), options)
-}
+
+  // if you wanted to go based off user location
+  //if(navigator.geolocation) {
+   // console,log('geolocation is here')
+
+   // navigator.geolocation.getCurrentPosition((loc) =>{
+   //   locwtion.let = loc.coords.latitude;
+   //   location.lng = loc.coords.longitude;
+
+      //write the map
+  //    map = new google.maps.Map(document.getElementById("map"), options);
+  //  },
+  //(err) => {
+   // console.log("User clicked no");
+  //  map = new google.maps.Map(document.getElementById("map"), options);
+ // }else {
+ //   console.log('geolocation not supported :(');
+ // map = new google.maps.Map(document.getElementById("map"), options)
+ // }
+//}
   
 
