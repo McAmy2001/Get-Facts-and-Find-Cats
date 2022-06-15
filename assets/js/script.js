@@ -234,3 +234,14 @@ var clearHistory = function() {
 submitBtnEl.addEventListener("click", submitBtnHandler);
 pastZipsEl.addEventListener("click", pastZipHandler);
 clearPastZipsEl.addEventListener("click", clearHistory);
+
+let map;
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 46.7296, lng: 94.6859 },
+    zoom: 10,
+  });
+}
+
+window.initMap = initMap;
