@@ -33,7 +33,7 @@
       <!-- Form for zip code search -->
       <form id="zip-code-form" class="column is-half">
         <label for="zip-code">Please enter your zip code:</label><br />
-        <input type="text" id="zip-code" name="zip-code" class="input is-link column is-one-third mt-3"
+        <input type="text" id="zip-code" name="zip-code" class="input is-link column is-narrow mt-3"
           placeholder="Ex: 90210"><br />
         <input type="submit" id="submit-btn" class="button is-link" value="Submit">
       </form>
@@ -48,18 +48,22 @@
     </div>
 
     <!-- Div to populate cat fact -->
-    <article id="cat-fact" class="message is-primary is-centered is-hidden">
-      <div class="message-header">
-        <!-- Cat Fact! -->
+    <div id="cat-fact" class="mb-6 is-centered is-hidden">
+      <div class="columns">
+        <article class="message is-success column is-three-fifths is-offset-one-fifth">
+          <div class="message-header">
+            Cat Fact!
+          </div>
+          <div class="message-body">
+            <!-- Here is a cat fact! Everyone loves facts about cats! -->
+          </div>
+        </article>
       </div>
-      <div class="message-body">
-        <!--Here is a cat fact! Everyone loves facts about cats! -->
-      </div>
-    </article>
+    </div>
 
     <!-- Div to hold dynamically created cat search results -->
     <div id="cat-display" class="m-3 columns is-multiline is-centered">
-      <progress id="progress-bar" class="progress is-large is-info is-invisible" max="100"></progress>
+
     </div>
 
   </main>
