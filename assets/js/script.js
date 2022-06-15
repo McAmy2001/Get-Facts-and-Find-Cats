@@ -136,30 +136,35 @@ var searchForCats = function(zip) {
     });
   });
 
+//----------------------------- Cat Fact Section ---------------------------------//
+const catFactsEl = document.createElement('cat-facts');
+const apiUrl = "https://cat-fact.herokuapp.com/facts";
+  var displayCatFacts = function(array) {
+    console.log(array);
+    console.log(array[0])
+    for (let i = 0; i < array.length; i++) {
+        var catFactCard = document.getElementById("cat-fact");
+  }
+  }
 
-
-  //var displayCatFacts = function(array) {
-  //  console.log(array);
-  //}
-
-  //var catFacts = function() {
-  //  fetch("https://cat-fact.herokuapp.com/facts")
-  //  .then(function(response) {
-  //    if (response.ok) {
-  //      response.json().then(function(data) {
-  //        //console.log(data);
-  //        var catFactsArray = [];
-  //        for (var i = 0; i < data.length; i++) {
-  //          //console.log(data[i].text);
-  //          catFactsArray.push(data[i].text);
-  //          //console.log(catFactsArray); 
-  //        }
-  //        displayCatFacts(catFactsArray);
-  //      })
-  //    }
-  //  })
-  //};
-  //catFacts();
+  var catFacts = function() {
+    fetch("https://cat-fact.herokuapp.com/facts")
+    .then(function(response) {
+      if (response.ok) {
+        response.json().then(function(data) {
+          //console.log(data);
+          var catFactsArray = [];
+          for (var i = 0; i < data.length; i++) {
+            //console.log(data[i].text);
+            catFactsArray.push(data[i].text);
+            //console.log(catFactsArray); 
+          }
+          displayCatFacts(catFactsArray);
+        })
+      }
+    })
+  };
+  catFacts();
   
 
   // FUNCTION for saving zip code searches to local storage
