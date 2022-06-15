@@ -23,7 +23,7 @@
     <h1 class="title is-size-1 has-text-info-light">
       Get Facts and Find Cats!
     </h1>
-    <!-- <figure class="has-text-centered"><img src="./assets/images/monster.jpg" alt="Amy's Awesome Monster" id="monster-img"></figure> -->
+    <!-- <figure class="has-text-centered"></figure> -->
   </header>
 
 
@@ -33,7 +33,7 @@
       <!-- Form for zip code search -->
       <form id="zip-code-form" class="column is-half">
         <label for="zip-code">Please enter your zip code:</label><br />
-        <input type="text" id="zip-code" name="zip-code" class="input is-link column is-one-third mt-3"
+        <input type="text" id="zip-code" name="zip-code" class="input is-link column is-narrow mt-3"
           placeholder="Ex: 90210"><br />
         <input type="submit" id="submit-btn" class="button is-link" value="Submit">
       </form>
@@ -65,18 +65,22 @@ var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
     </div>
 
     <!-- Div to populate cat fact -->
-    <article id="cat-fact" class="message is-primary is-centered is-hidden">
-      <div class="message-header">
-        <!-- Cat Fact! -->
+    <div id="cat-fact" class="mb-6 is-centered is-hidden">
+      <div class="columns">
+        <article class="message is-success column is-three-fifths is-offset-one-fifth">
+          <div class="message-header">
+            Cat Fact!
+          </div>
+          <div class="message-body">
+            <!-- Here is a cat fact! Everyone loves facts about cats! -->
+          </div>
+        </article>
       </div>
-      <div class="message-body">
-        <!--Here is a cat fact! Everyone loves facts about cats! -->
-      </div>
-    </article>
+    </div>
 
     <!-- Div to hold dynamically created cat search results -->
     <div id="cat-display" class="m-3 columns is-multiline is-centered">
-      <progress id="progress-bar" class="progress is-large is-info is-invisible" max="100"></progress>
+
     </div>
 
   </main>
@@ -85,7 +89,10 @@ var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
   <div class="modal" id="enter-zip">
     <div class="modal-background"></div>
     <div class="modal-content">
+      <div class="image">
+      </div>
       <div class="box">
+        <img src="./assets/images/monster.jpg" alt="Amy's Awesome Monster" id="monster-img">
         <p>Please enter a valid 5 digit zip code.</p>
       </div>
     </div>
