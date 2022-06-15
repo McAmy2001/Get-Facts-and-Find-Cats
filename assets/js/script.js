@@ -138,17 +138,23 @@ var searchForCats = function(zip) {
 
 //----------------------------- Cat Fact Section ---------------------------------//
 const catFactsEl = document.createElement('cat-facts');
+var catTimer = 0;
 const apiUrl = "https://cat-fact.herokuapp.com/facts";
   var displayCatFacts = function(array) {
-    console.log(array);
-    console.log(array[0])
-    for (let i = 0; i < array.length; i++) {
+    //console.log(array);
+    //console.log(array[0])
+      console.log(array[catTimer]);
         var catFactCard = document.getElementById("cat-fact");
-  }
+        catFactCard.textContent = array[catTimer];
+        catFactCard.classList.remove("is-hidden");
+        catTimer = catTimer + 1;
+        if (catTimer > 4) {
+          catTimer = 0;
+        }
   }
 
   var catFacts = function() {
-    fetch("https://cat-fact.herokuapp.com/facts")
+    fetch(apiUrl)
     .then(function(response) {
       if (response.ok) {
         response.json().then(function(data) {
@@ -164,7 +170,7 @@ const apiUrl = "https://cat-fact.herokuapp.com/facts";
       }
     })
   };
-  catFacts();
+ 
   
 
   // FUNCTION for saving zip code searches to local storage
@@ -225,6 +231,7 @@ var submitBtnHandler = function(event){
   searchForCats(zipCode);
   saveZip(zipCode);
   zipInputEl.value = '';
+  catFacts();
 };
 
 // FUNCTION to clear past zip search history
