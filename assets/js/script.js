@@ -136,30 +136,41 @@ var searchForCats = function(zip) {
     });
   });
 
+//----------------------------- Cat Fact Section ---------------------------------//
+const catFactsEl = document.createElement('cat-facts');
+var catTimer = 0;
+const apiUrl = "https://cat-fact.herokuapp.com/facts";
+  var displayCatFacts = function(array) {
+    //console.log(array);
+    //console.log(array[0])
+      console.log(array[catTimer]);
+        var catFactCard = document.getElementById("cat-fact");
+        catFactCard.textContent = array[catTimer];
+        catFactCard.classList.remove("is-hidden");
+        catTimer = catTimer + 1;
+        if (catTimer > 4) {
+          catTimer = 0;
+        }
+  }
 
-
-  //var displayCatFacts = function(array) {
-  //  console.log(array);
-  //}
-
-  //var catFacts = function() {
-  //  fetch("https://cat-fact.herokuapp.com/facts")
-  //  .then(function(response) {
-  //    if (response.ok) {
-  //      response.json().then(function(data) {
-  //        //console.log(data);
-  //        var catFactsArray = [];
-  //        for (var i = 0; i < data.length; i++) {
-  //          //console.log(data[i].text);
-  //          catFactsArray.push(data[i].text);
-  //          //console.log(catFactsArray); 
-  //        }
-  //        displayCatFacts(catFactsArray);
-  //      })
-  //    }
-  //  })
-  //};
-  //catFacts();
+  var catFacts = function() {
+    fetch(apiUrl)
+    .then(function(response) {
+      if (response.ok) {
+        response.json().then(function(data) {
+          //console.log(data);
+          var catFactsArray = [];
+          for (var i = 0; i < data.length; i++) {
+            //console.log(data[i].text);
+            catFactsArray.push(data[i].text);
+            //console.log(catFactsArray); 
+          }
+          displayCatFacts(catFactsArray);
+        })
+      }
+    })
+  };
+ 
   
 
   // FUNCTION for saving zip code searches to local storage
@@ -220,6 +231,7 @@ var submitBtnHandler = function(event){
   searchForCats(zipCode);
   saveZip(zipCode);
   zipInputEl.value = '';
+  catFacts();
 };
 
 // FUNCTION to clear past zip search history
@@ -235,6 +247,8 @@ submitBtnEl.addEventListener("click", submitBtnHandler);
 pastZipsEl.addEventListener("click", pastZipHandler);
 clearPastZipsEl.addEventListener("click", clearHistory);
 
+
+
 let map;
 
 function initMap() {
@@ -245,3 +259,4 @@ function initMap() {
 }
 
 window.initMap = initMap;
+
