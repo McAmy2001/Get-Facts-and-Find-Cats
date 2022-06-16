@@ -12,3 +12,5 @@ The idea and motivation for Get Facts and Find Cats was to have a simple, easy-t
 RescueGroups.org: https://rescuegroups.org/services/adoptable-pet-data-api/ <br>
 Cat Facts by Alex Wohlbruck: https://alexwohlbruck.github.io/cat-facts/docs/
 
+
+![](./assets/images/index-screenshot.PNG "Screenshot of application")
