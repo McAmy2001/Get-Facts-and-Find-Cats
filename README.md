@@ -1,6 +1,6 @@
 # Get Facts and Find Cats
 
-[Get Facts and Find Cats Website](https://github.com/McAmy2001/social-network-API)
+[Get Facts and Find Cats Website](https://mcamy2001.github.io/Get-Facts-and-Find-Cats)
 
 
 ## Description
