@@ -1,4 +1,4 @@
-# Get Facts and Find Cats
+# Bootcamp Module 7 & 8, Group Project: Get Facts and Find Cats
 
 [Get Facts and Find Cats Website](https://mcamy2001.github.io/Get-Facts-and-Find-Cats)
 
